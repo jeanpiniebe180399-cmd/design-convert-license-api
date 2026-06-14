@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: design-convert-license-api
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: LICENSE_SECRET
+        value: JEANDESIGN2024XK
+      - key: ADMIN_KEY
+        generateValue: true
+      - key: DB_PATH
+        value: /data/licenses.db
+    disk:
+      name: license-data
+      mountPath: /data
+      sizeGB: 1
